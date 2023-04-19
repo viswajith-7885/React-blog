@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { useState } from 'react';
+import List from './componants/List';
+import Form from './componants/form';
+import context from './context/context';
+import{Routes,Route} from 'react-router-dom'
+import Display from './componants/Display';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+
+  const[form,setform]=useState([])
+   
+  const state={
+    form:form,
+    setform:setform
+  }
+   
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <context.Provider value={state}>
+  <Routes>
+  <Route path='/' element={<List/>}/>
+  <Route path='/form' element={<Form/>}/>
+  <Route path='/list/:id' element={<Display/>}/>
+
+  </Routes>
+  </context.Provider>
   );
 }
 
